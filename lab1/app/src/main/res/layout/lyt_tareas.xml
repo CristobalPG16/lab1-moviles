@@ -34,4 +34,11 @@
         android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/lista"
+        android:layout_width="409dp"
+        android:layout_height="377dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="113dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
