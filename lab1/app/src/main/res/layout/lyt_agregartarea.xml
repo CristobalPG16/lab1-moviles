@@ -108,7 +108,7 @@
                 android:text="Hora entrega:" />
 
             <EditText
-                android:id="@+id/txtHora"
+                android:id="@+id/txtHoraEntrega"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
