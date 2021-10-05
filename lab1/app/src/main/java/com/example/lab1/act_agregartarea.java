@@ -39,7 +39,6 @@ public class act_agregartarea extends AppCompatActivity {
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (txtNombre.getText().toString().isEmpty() || txtObjetivo.getText().toString().isEmpty() || txtFechaEntrega.getText().toString().isEmpty() || txtHoraEntrega.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(), "Ingrese todos los datos", Toast.LENGTH_SHORT).show();
                 }//Fin if
