@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import com.example.lab1.Modelo.Tarea;
 
 public class act_agregartarea extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    TextView txtNombre, txtObjetivo, txtFechaEntrega, txtHoraEntrega;
+    EditText txtNombre, txtObjetivo, txtFechaEntrega, txtHoraEntrega;
     Button btn_guardar;
 
     Spinner spinnerCategoria;

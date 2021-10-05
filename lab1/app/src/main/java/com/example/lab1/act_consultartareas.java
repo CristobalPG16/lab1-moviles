@@ -46,6 +46,7 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //getApplicationContext().deleteDatabase(NOMBRE_DB);//Elimina base de datos
         abrirDataBase();
 
         setContentView(R.layout.lyt_tareas);
@@ -82,6 +83,14 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
             adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, listaTareas);
             listView.setAdapter(adapter);
         }//Fin if
+
+        btn_buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, getListaFiltrada(filtro, listaTareas));
+                listView.setAdapter(adapter);
+            }//Fin onClick
+        });//Fin setOnClickListener
 
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +135,7 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
     }//Fin addTarea
 
     private ArrayList<Tarea> getTarea(){
-        Cursor cursor = db.query(TABLA_TAREA, new String[]{"id", "nombre", "objetivo", "fechaEntrega", "horaEntrega"},
+        Cursor cursor = db.query(TABLA_TAREA, new String[]{"id", "nombre", "objetivo", "fechaEntrega", "horaEntrega", "categoria"},
         null, null, null, null, "id desc");
         cursor.moveToFirst();
         ArrayList<Tarea> listaTa = new ArrayList<>();
@@ -138,7 +147,7 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
             tarea.setObjetivo(cursor.getString(2));
             tarea.setFechaEntrega(cursor.getString(3));
             tarea.setHoraEntrega(cursor.getString(4));
-            //tarea.setSpinner(cursor.getString(5));
+            tarea.setSpinner(cursor.getString(5));
             listaTa.add(tarea);
             cursor.moveToNext();
         }//Fin while
@@ -153,9 +162,24 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
         content.put("objetivo", tarea.getObjetivo());
         content.put("fechaEntrega", tarea.getFechaEntrega());
         content.put("horaEntrega", tarea.getHoraEntrega());
-        //content.put("categoria", tarea.getSpinner());
+        content.put("categoria", tarea.getSpinner());
         return db.update(TABLA_TAREA, content, "id="+tarea.getId(), null)>0;
     }//Fin updateTarea
+
+    public ArrayList<Tarea> getListaFiltrada(String categoria, ArrayList<Tarea> lista){
+        ArrayList<Tarea> listaFiltrada = new ArrayList<>();
+        if (categoria.equalsIgnoreCase("categoria")){
+            listaFiltrada = lista;
+        }//Fin if
+        else {
+            for (int i = 0; i < lista.size(); i++){
+                if(lista.get(i).getSpinner().equalsIgnoreCase(categoria)){
+                    listaFiltrada.add(lista.get(i));
+                }//Fin if
+            }//Fin For
+        }//Fin else
+        return listaFiltrada;
+    }//Fin metodo
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
