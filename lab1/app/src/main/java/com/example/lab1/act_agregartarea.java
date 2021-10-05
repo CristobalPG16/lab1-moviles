@@ -40,15 +40,12 @@ public class act_agregartarea extends AppCompatActivity implements AdapterView.O
         btn_guardar = findViewById(R.id.btn_guardar);
 
         //spiner
-
-
         spinnerCategoria = findViewById(R.id.spinnerCategoria);
         ArrayAdapter<CharSequence> adapterspinner = ArrayAdapter.createFromResource(this,
                 R.array.categorias, android.R.layout.simple_spinner_item);
         adapterspinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapterspinner);
         spinnerCategoria.setOnItemSelectedListener(this);
-
         //spiner
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
