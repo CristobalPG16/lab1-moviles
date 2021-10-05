@@ -77,10 +77,8 @@ public class act_consultartareas extends AppCompatActivity {
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(act_consultartareas.this, act_agregartarea.class);
                 startActivity(intent);
-
             }//Fin onClick
         });//Fin setOnClickListener
 
