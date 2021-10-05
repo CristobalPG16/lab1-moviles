@@ -20,7 +20,7 @@ import com.example.lab1.Modelo.Tarea;
 
 import java.util.ArrayList;
 
-public class act_consultartareas extends AppCompatActivity {
+public class act_consultartareas extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private static SQLiteDatabase db;
     private static final String NOMBRE_DB = "MultiSQlite";
@@ -35,11 +35,12 @@ public class act_consultartareas extends AppCompatActivity {
 
     Tarea tarea;
     Tarea tareaModificada;
+    String filtro;
 
     int id;
 
     public static final String tbTarea = "CREATE TABLE IF NOT EXISTS tarea( id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-        "nombre STRING NOT NULL,"+"objetivo STRING NOT NULL,"+"fechaEntrega STRING NOT NULL,"+"horaEntrega STRING NOT NULL);";
+        "nombre STRING NOT NULL,"+"objetivo STRING NOT NULL,"+"fechaEntrega STRING NOT NULL,"+"horaEntrega STRING NOT NULL,"+"categoria STRING NOT NULL);";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,14 @@ public class act_consultartareas extends AppCompatActivity {
 
         tarea = getIntent().getParcelableExtra("tarea");
         tareaModificada = getIntent().getParcelableExtra("tareaModificada");
+
+//spinner
+        ArrayAdapter<CharSequence> adapterspinner = ArrayAdapter.createFromResource(this,
+                R.array.categorias, android.R.layout.simple_spinner_item);
+        adapterspinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filtro_spinner.setAdapter(adapterspinner);
+        filtro_spinner.setOnItemSelectedListener(this);
+        //spinner
 
         if (tarea != null){
             addTarea(tarea);
@@ -112,6 +121,7 @@ public class act_consultartareas extends AppCompatActivity {
         content.put("objetivo", tarea.getObjetivo());
         content.put("fechaEntrega", tarea.getFechaEntrega());
         content.put("horaEntrega", tarea.getHoraEntrega());
+        content.put("categoria", tarea.getSpinner());
         return db.insert(TABLA_TAREA, null, content)>0;
     }//Fin addTarea
 
@@ -128,6 +138,7 @@ public class act_consultartareas extends AppCompatActivity {
             tarea.setObjetivo(cursor.getString(2));
             tarea.setFechaEntrega(cursor.getString(3));
             tarea.setHoraEntrega(cursor.getString(4));
+            //tarea.setSpinner(cursor.getString(5));
             listaTa.add(tarea);
             cursor.moveToNext();
         }//Fin while
@@ -142,7 +153,17 @@ public class act_consultartareas extends AppCompatActivity {
         content.put("objetivo", tarea.getObjetivo());
         content.put("fechaEntrega", tarea.getFechaEntrega());
         content.put("horaEntrega", tarea.getHoraEntrega());
+        //content.put("categoria", tarea.getSpinner());
         return db.update(TABLA_TAREA, content, "id="+tarea.getId(), null)>0;
     }//Fin updateTarea
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        filtro = adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }//Fin clase

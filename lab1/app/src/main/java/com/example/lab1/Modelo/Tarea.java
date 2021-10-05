@@ -6,14 +6,20 @@ import android.os.Parcelable;
 public class Tarea implements Parcelable {
 
     private int id;
-    private String nombre,objetivo, fechaEntrega, horaEntrega;
+    private String nombre;
+    private String objetivo;
+    private String fechaEntrega;
+    private String horaEntrega;
+    private String spinner;
 
-    public Tarea(int id, String nombre, String objetivo, String fechaEntrega, String horaEntrega) {
+
+    public Tarea(int id, String nombre, String objetivo, String fechaEntrega, String horaEntrega, String spinner) {
         this.id = id;
         this.nombre = nombre;
         this.objetivo = objetivo;
         this.fechaEntrega = fechaEntrega;
         this.horaEntrega = horaEntrega;
+        this.spinner=spinner;
     }
 
     public Tarea() {
@@ -22,6 +28,7 @@ public class Tarea implements Parcelable {
         this.objetivo = "";
         this.fechaEntrega = "";
         this.horaEntrega = "";
+        this.spinner="";
     }
 
     protected Tarea(Parcel in) {
@@ -30,6 +37,7 @@ public class Tarea implements Parcelable {
         objetivo = in.readString();
         fechaEntrega = in.readString();
         horaEntrega = in.readString();
+        spinner=in.readString();
     }
 
     public static final Creator<Tarea> CREATOR = new Creator<Tarea>() {
@@ -84,13 +92,24 @@ public class Tarea implements Parcelable {
         this.horaEntrega = horaEntrega;
     }
 
+    public String getSpinner() {
+        return spinner;
+    }
+
+    public void setSpinner(String spinner) {
+        this.spinner = spinner;
+    }
+
+
     @Override
     public String toString() {
         return "ID: "+ id +
                 " - Nombre: " + nombre +
                 " - Objetivo: " + objetivo +
                 " - Fecha de Entrega: " + fechaEntrega +
-                " - Hora de Entrega: " + horaEntrega;
+                " - Hora de Entrega: " + horaEntrega+
+                " - Spinner: " + spinner;
+
     }
 
     @Override
@@ -105,5 +124,6 @@ public class Tarea implements Parcelable {
         parcel.writeString(objetivo);
         parcel.writeString(fechaEntrega);
         parcel.writeString(horaEntrega);
+        parcel.writeString(spinner);
     }
 }//Fin clase

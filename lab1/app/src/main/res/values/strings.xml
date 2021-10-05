@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">lab1</string>
+
+    <string-array name="categorias">
+        <item>Moviles</item>
+        <item>Videojuegos</item>
+        <item>Multimedia</item>
+        <item>Ingles</item>
+        <item>Escrita</item>
+        <item>Mate discreta</item>
+        <item>Empresarial</item>
+    </string-array>
+
 </resources>
