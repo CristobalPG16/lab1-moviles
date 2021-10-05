@@ -57,19 +57,22 @@ public class act_consultartareas extends AppCompatActivity {
         tarea = getIntent().getParcelableExtra("tarea");
         tareaModificada = getIntent().getParcelableExtra("tareaModificada");
 
-        if (tarea!=null){
+        if (tarea != null){
             addTarea(tarea);
         }//Fin if
-
-        if (getTarea()!=null){
-            listaTareas = getTarea();
-            adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, listaTareas);
-            listView.setAdapter(adapter);
-        }//Fin If
 
         if (tareaModificada != null){
             updateTarea(tareaModificada);
         }//Fin
+
+        if (getTarea() != null){
+            listaTareas = getTarea();
+        }//Fin If
+
+        if (listaTareas != null){
+            adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, listaTareas);
+            listView.setAdapter(adapter);
+        }//Fin if
 
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
