@@ -87,10 +87,10 @@ public class Tarea implements Parcelable {
     @Override
     public String toString() {
         return "ID: "+ id +
-                "- Nombre: " + nombre +
-                "- Objetivo: " + objetivo +
-                "- Fecha de Entrega: " + fechaEntrega +
-                "- Hora de Entrega: " + horaEntrega;
+                " - Nombre: " + nombre +
+                " - Objetivo: " + objetivo +
+                " - Fecha de Entrega: " + fechaEntrega +
+                " - Hora de Entrega: " + horaEntrega;
     }
 
     @Override
@@ -100,6 +100,7 @@ public class Tarea implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(nombre);
         parcel.writeString(objetivo);
         parcel.writeString(fechaEntrega);

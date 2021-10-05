@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOutOfMemoryException;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -58,16 +59,11 @@ public class act_consultartareas extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Agregado correctamente", Toast.LENGTH_SHORT).show();
         }//Fin if
 
-        btn_actualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getTarea()!=null){
-                    listaTareas = getTarea();
-                    adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, listaTareas);
-                    listView.setAdapter(adapter);
-                }//Fin If
-            }//Fin onClick
-        });//Fin setOnClickListener
+        if (getTarea()!=null){
+            listaTareas = getTarea();
+            adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, listaTareas);
+            listView.setAdapter(adapter);
+        }//Fin If
 
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +74,14 @@ public class act_consultartareas extends AppCompatActivity {
 
             }//Fin onClick
         });//Fin setOnClickListener
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Tarea tarea = listaTareas.get(i);
+
+            }//Fin onItemClick
+        });//Fin setOnItemClickListener
 
     }//Fin onCreate
 
