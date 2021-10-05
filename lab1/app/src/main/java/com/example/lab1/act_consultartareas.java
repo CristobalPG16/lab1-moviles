@@ -58,7 +58,7 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
         tarea = getIntent().getParcelableExtra("tarea");
         tareaModificada = getIntent().getParcelableExtra("tareaModificada");
 
-//spinner
+        //spinner
         ArrayAdapter<CharSequence> adapterspinner = ArrayAdapter.createFromResource(this,
                 R.array.categorias, android.R.layout.simple_spinner_item);
         adapterspinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
