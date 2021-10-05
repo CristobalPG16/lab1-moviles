@@ -61,7 +61,7 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
 
         //spinner
         ArrayAdapter<CharSequence> adapterspinner = ArrayAdapter.createFromResource(this,
-                R.array.categorias, android.R.layout.simple_spinner_item);
+                R.array.todas, android.R.layout.simple_spinner_item);
         adapterspinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filtro_spinner.setAdapter(adapterspinner);
         filtro_spinner.setOnItemSelectedListener(this);
@@ -168,7 +168,7 @@ public class act_consultartareas extends AppCompatActivity implements AdapterVie
 
     public ArrayList<Tarea> getListaFiltrada(String categoria, ArrayList<Tarea> lista){
         ArrayList<Tarea> listaFiltrada = new ArrayList<>();
-        if (categoria.equalsIgnoreCase("categoria")){
+        if (categoria.equalsIgnoreCase("Todas")){
             listaFiltrada = lista;
         }//Fin if
         else {
