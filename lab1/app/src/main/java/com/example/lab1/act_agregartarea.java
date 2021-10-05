@@ -48,6 +48,8 @@ public class act_agregartarea extends AppCompatActivity {
                     String horaEntrga = txtHoraEntrega.getText().toString();
 
                     tarea = new Tarea(0, nombre, objetivo, fechaEntrega, horaEntrga);
+                    limpiar();
+                    Toast.makeText(getApplicationContext(), "Agregado correctamente", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(act_agregartarea.this, act_consultartareas.class);
                     intent.putExtra("tarea", tarea);
@@ -56,4 +58,12 @@ public class act_agregartarea extends AppCompatActivity {
             }//Fin onClick
         });//Fin setOnClickListener
     }//Fin onCreate
+
+    public void limpiar(){
+        txtNombre.setText("");
+        txtObjetivo.setText("");
+        txtFechaEntrega.setText("");
+        txtHoraEntrega.setText("");
+    }
+
 }//Fin clase

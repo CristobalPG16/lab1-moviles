@@ -34,6 +34,9 @@ public class act_consultartareas extends AppCompatActivity {
     ArrayAdapter<Tarea> adapter;
 
     Tarea tarea;
+    Tarea tareaModificada;
+
+    int id;
 
     public static final String tbTarea = "CREATE TABLE IF NOT EXISTS tarea( id INTEGER PRIMARY KEY AUTOINCREMENT,"+
         "nombre STRING NOT NULL,"+"objetivo STRING NOT NULL,"+"fechaEntrega STRING NOT NULL,"+"horaEntrega STRING NOT NULL);";
@@ -49,14 +52,13 @@ public class act_consultartareas extends AppCompatActivity {
         filtro_spinner = findViewById(R.id.filtro_spinner);
         btn_buscar = findViewById(R.id.btn_buscar);
         btn_agregar = findViewById(R.id.btn_agregar);
-        btn_actualizar = findViewById(R.id.btnActualizar);
         listView = findViewById(R.id.lista);
 
         tarea = getIntent().getParcelableExtra("tarea");
+        tareaModificada = getIntent().getParcelableExtra("tareaModificada");
 
         if (tarea!=null){
             addTarea(tarea);
-            Toast.makeText(getApplicationContext(), "Agregado correctamente", Toast.LENGTH_SHORT).show();
         }//Fin if
 
         if (getTarea()!=null){
@@ -64,6 +66,10 @@ public class act_consultartareas extends AppCompatActivity {
             adapter = new ArrayAdapter<>(act_consultartareas.this, android.R.layout.simple_list_item_1, listaTareas);
             listView.setAdapter(adapter);
         }//Fin If
+
+        if (tareaModificada != null){
+            updateTarea(tareaModificada);
+        }//Fin
 
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +85,10 @@ public class act_consultartareas extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tarea tarea = listaTareas.get(i);
-
+                id = listaTareas.get(i).getId();
+                Intent intent = new Intent(act_consultartareas.this, act_modificartarea.class);
+                intent.putExtra("tarea", tarea);
+                startActivity(intent);
             }//Fin onItemClick
         });//Fin setOnItemClickListener
 
@@ -126,13 +135,13 @@ public class act_consultartareas extends AppCompatActivity {
         return listaTa;
     }//Fin getTarea
 
-    private boolean updateTarea(int id, Tarea tarea){
+    private boolean updateTarea(Tarea tarea){
         ContentValues content = new ContentValues();
         content.put("nombre", tarea.getNombre());
         content.put("objetivo", tarea.getObjetivo());
         content.put("fechaEntrega", tarea.getFechaEntrega());
         content.put("horaEntrega", tarea.getHoraEntrega());
-        return db.update(TABLA_TAREA, content, "id="+id, null)>0;
+        return db.update(TABLA_TAREA, content, "id="+tarea.getId(), null)>0;
     }//Fin updateTarea
 
 }//Fin clase
